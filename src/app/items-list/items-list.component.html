@@ -1,0 +1,20 @@
+<div class="row py-2">
+    <div class="col-3">Filter by:</div>
+    <div class="col">
+        <input type='text' [(ngModel)]='filter' />
+    </div>
+</div>
+<ul class="list-group list-group-flush py-2">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col">No</div>
+            <div class="col">Name</div>
+            <div class="col">Price</div>
+            <div class="col">Quantity</div>
+            <div class="col"></div>
+        </div>
+    </li>
+    <li class="list-group-item" *ngFor="let item of filteredItems">
+        <app-item [item]="item" (clickedItem)="onClickedItem($event)"></app-item>
+    </li>
+</ul>

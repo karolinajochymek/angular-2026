@@ -1,0 +1,9 @@
+<ng-container *ngIf="item && item.no">
+    <div class="row" [ngClass]="{'clicked': item.isClicked}">
+        <div class="col">{{item.no}}</div>
+        <div class="col">{{item.name}}</div>
+        <div class="col">{{item.price | currency:'USD':'symbol'}}</div>
+        <div class="col">{{item.quantity}}</div>
+        <a class="col blue" (click)="onClick()">Click here</a>
+    </div>
+</ng-container>
