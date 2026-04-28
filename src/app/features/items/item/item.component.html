@@ -7,6 +7,6 @@
     <!-- pipe currency działa identycznie jak w Angular 18 -->
     <div class="col">{{item().price | currency:'USD':'symbol'}}</div>
     <div class="col">{{item().quantity}}</div>
-    <a class="col blue" (click)="onClick()">Click here</a>
+    <button class="col blue" type="button" (click)="onClick()">Click here</button>
   </div>
 }

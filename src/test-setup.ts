@@ -1,4 +1,19 @@
-import { setupZonelessTestEnv } from '@angular/core/testing';
+import '@angular/compiler';
+import '@analogjs/vitest-angular/setup-snapshots';
 
-// Konfiguracja środowiska testowego bez Zone.js — zgodnie z provideZonelessChangeDetection()
-setupZonelessTestEnv();
+import { provideZonelessChangeDetection, NgModule } from '@angular/core';
+import {
+  BrowserTestingModule,
+  platformBrowserTesting,
+} from '@angular/platform-browser/testing';
+import { getTestBed } from '@angular/core/testing';
+
+@NgModule({
+  providers: [provideZonelessChangeDetection()],
+})
+export class ZonelessTestModule {}
+
+getTestBed().initTestEnvironment(
+  [BrowserTestingModule, ZonelessTestModule],
+  platformBrowserTesting(),
+);
