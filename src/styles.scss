@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+/* Loading Bootstrap SCSS — @use replaces deprecated @import (Dart Sass 3.0). */
+/* as * keeps Bootstrap variables and mixins in global scope (mirrors @import behaviour). */
+@use 'bootstrap/scss/bootstrap' as *;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
