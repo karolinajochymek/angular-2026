@@ -1,27 +1,30 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainPageComponent } from './main-page.component';
 
 describe('MainPageComponent', () => {
+  let fixture: ComponentFixture<MainPageComponent>;
+  let component: MainPageComponent;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MainPageComponent],
     }).compileComponents();
+
+    fixture = TestBed.createComponent(MainPageComponent);
+    component = fixture.componentInstance;
   });
 
   it('should create', () => {
-    const fixture = TestBed.createComponent(MainPageComponent);
-    expect(fixture.componentInstance).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('should initialize title signal with default value', () => {
-    const fixture = TestBed.createComponent(MainPageComponent);
-    expect(fixture.componentInstance.title()).toBe('Witamy na szkoleniu');
+    expect(component.title()).toBe('Witamy na szkoleniu');
   });
 
   it('should append ! to title when changeTitle() is called', () => {
-    const fixture = TestBed.createComponent(MainPageComponent);
-    fixture.componentInstance.changeTitle();
-    expect(fixture.componentInstance.title()).toBe('Witamy na szkoleniu!');
+    component.changeTitle();
+    expect(component.title()).toBe('Witamy na szkoleniu!');
   });
 });
