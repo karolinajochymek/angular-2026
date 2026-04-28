@@ -1,0 +1,35 @@
+<div class="row py-2">
+  <div class="col-3">Filter by:</div>
+  <div class="col">
+    <!-- [ngModel] odczytuje wartość sygnału; (ngModelChange) aktualizuje sygnał przez .set() -->
+    <!-- [(ngModel)] jest dalej poprawne w Angular 21 dla zwykłych właściwości -->
+    <input type="text" [ngModel]="filter()" (ngModelChange)="filter.set($event)" />
+  </div>
+</div>
+
+<ul class="list-group list-group-flush py-2">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col">No</div>
+      <div class="col">Name</div>
+      <div class="col">Price</div>
+      <div class="col">Quantity</div>
+      <div class="col"></div>
+    </div>
+  </li>
+
+  <!-- @defer — lista ładuje się odroczone, gdy wejdzie w obszar widoczności ekranu -->
+  <!-- Blok @placeholder jest wyświetlany przed załadowaniem -->
+  @defer (on viewport) {
+    <!-- @for zastępuje *ngFor; track jest obowiązkowe (błąd kompilatora bez niego) -->
+    @for (item of filteredItems(); track (item.no ?? $index)) {
+      <li class="list-group-item">
+        <app-item [item]="item" (clickedItem)="onClickedItem($event)" />
+      </li>
+    }
+  } @placeholder {
+    <li class="list-group-item text-muted">Ładowanie elementów…</li>
+  } @loading (minimum 200ms) {
+    <li class="list-group-item text-muted">Pobieranie danych…</li>
+  }
+</ul>

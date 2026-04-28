@@ -1,0 +1,12 @@
+<div class="card container">
+  <div class="card-body">
+    <div class="card-title">
+      <!-- title() — odczyt wartości sygnału; widok automatycznie aktualizuje się przy zmianie -->
+      {{title()}}
+    </div>
+    <button type="button" class="btn btn-info mb-2" (click)="changeTitle()">
+      Zmień tytuł
+    </button>
+    <app-items-list />
+  </div>
+</div>

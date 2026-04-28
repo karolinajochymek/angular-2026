@@ -1,0 +1,12 @@
+<!-- @if zastępuje *ngIf; ng-container nie jest potrzebny — blok @if pełni tę samą rolę -->
+@if (item() && item().no) {
+  <!-- [class.clicked] zastępuje [ngClass]="{'clicked': item.isClicked}" -->
+  <div class="row" [class.clicked]="item().isClicked">
+    <div class="col">{{item().no}}</div>
+    <div class="col">{{item().name}}</div>
+    <!-- pipe currency działa identycznie jak w Angular 18 -->
+    <div class="col">{{item().price | currency:'USD':'symbol'}}</div>
+    <div class="col">{{item().quantity}}</div>
+    <a class="col blue" (click)="onClick()">Click here</a>
+  </div>
+}
