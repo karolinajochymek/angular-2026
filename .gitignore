@@ -43,3 +43,6 @@ Thumbs.db
 
 #Internal instructions
 .github/instructions/*
+
+# Presentation files (local only)
+/presentation/
