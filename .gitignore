@@ -42,7 +42,10 @@ testem.log
 Thumbs.db
 
 #Internal instructions
-.github/instructions/*
+/.github/
+
+# Docs (local only)
+/docs/
 
 # Presentation files (local only)
 /presentation/
