@@ -1,20 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ItemsListComponent } from '../items/items-list/items-list.component';
-
+import { SignalCounterComponent } from '../signal-counter/signal-counter.component';
+import { PermissionDemoComponent } from '../permission-demo/permission-demo.component';
+// strona składa przykłady z osobnych komponentów.
+// Każde dziecko przechowuje własny stan; imports udostępnia je w szablonie standalone.
 @Component({
   selector: 'app-main-page',
+  imports: [ItemsListComponent, SignalCounterComponent, PermissionDemoComponent],
   templateUrl: './main-page.component.html',
-  styleUrl: './main-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ItemsListComponent],
 })
-export class MainPageComponent {
-  // signal() zamiast zwykłego stringa — zmiana wartości automatycznie aktualizuje widok
-  readonly title = signal('Witamy na szkoleniu');
-
-  changeTitle(): void {
-    // .update() — aktualizuje wartość sygnału na podstawie poprzedniej wartości
-    this.title.update(t => t + '!');
-  }
-}
+export class MainPageComponent {}

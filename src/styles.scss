@@ -1,8 +1,251 @@
-/* You can add global styles to this file, and also import other style files */
+// Roboto pochodzi z lokalnej paczki; wygląd nie zależy od fontów na komputerze uczestnika.
+@import '@fontsource/roboto/latin-400.css';
+@import '@fontsource/roboto/latin-ext-400.css';
+@import '@fontsource/roboto/latin-500.css';
+@import '@fontsource/roboto/latin-ext-500.css';
+@import '@fontsource/roboto/latin-700.css';
+@import '@fontsource/roboto/latin-ext-700.css';
 
-/* Loading Bootstrap SCSS — @use replaces deprecated @import (Dart Sass 3.0). */
-/* as * keeps Bootstrap variables and mixins in global scope (mirrors @import behaviour). */
-@use 'bootstrap/scss/bootstrap' as *;
+// Gotowy motyw Azure/Blue ładuje angular.json. Poniżej układ i typografia z tokenów Material.
+// Nie zmieniamy wewnętrznych klas .mat-*, kolorów przycisków ani kształtu kontrolek.
+html {
+  color-scheme: light;
+}
+body {
+  margin: 0;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-large, 400 16px/24px Roboto, sans-serif);
+}
+header,
+main,
+footer {
+  width: min(1120px, calc(100% - 64px));
+  margin-inline: auto;
+}
+header {
+  padding-block: 40px 28px;
+}
+main {
+  padding-bottom: 32px;
+}
+footer {
+  padding-block: 16px 32px;
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-small);
+}
+h1 {
+  margin: 8px 0 12px;
+  font: var(--mat-sys-headline-large);
+}
+h2 {
+  margin: 0;
+  font: var(--mat-sys-headline-small);
+}
+h3 {
+  font: var(--mat-sys-title-large);
+}
+p {
+  margin-block: 0 12px;
+}
+.eyebrow {
+  margin: 0;
+  color: var(--mat-sys-primary);
+  font: var(--mat-sys-label-large);
+}
+.intro,
+.section-description,
+.result-count {
+  color: var(--mat-sys-on-surface-variant);
+}
+.intro {
+  margin: 0;
+  font: var(--mat-sys-body-medium);
+}
+.section-heading {
+  margin-bottom: 20px;
+}
+.section-description {
+  margin: 6px 0 0;
+  font: var(--mat-sys-body-medium);
+}
+.catalog-section {
+  margin-block: 32px;
+}
+.demo-card {
+  margin-block: 16px;
+}
+.demo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 24px;
+}
+.demo-row h2 {
+  font: var(--mat-sys-title-medium);
+}
+.demo-row p {
+  margin: 4px 0 0;
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-medium);
+}
+.demo-row button {
+  flex-shrink: 0;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+.search-field {
+  flex: 1 1 260px;
+}
+.scenario-field {
+  flex: 0 1 240px;
+}
+.toolbar app-stock-toggle {
+  flex-shrink: 0;
+}
+.results-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-block: 20px 12px;
+  min-height: 24px;
+  font: var(--mat-sys-body-medium);
+}
+.results-row p {
+  margin: 0;
+}
+// Tabela zachowuje nagłówki także na małym ekranie; przewijamy tylko jej kontener.
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: 24px;
+}
+.products-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  background: var(--mat-sys-surface);
+}
+// Natywna tabela pozwala zachować osobny komponent całego wiersza i prostą pętlę @for.
+// Rozmiary oraz tokeny typografii/kolorów odpowiadają tabeli Material.
+.products-table th,
+.products-table td {
+  padding: 0 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+.products-table th {
+  height: 56px;
+  font: var(--mat-sys-title-small);
+}
+.products-table td {
+  height: 52px;
+  font: var(--mat-sys-body-medium);
+}
+.products-table .number-cell {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.products-table a {
+  color: var(--mat-sys-primary);
+  text-underline-offset: 3px;
+}
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 32px 0;
+  color: var(--mat-sys-on-surface-variant);
+}
+.extra-content {
+  padding: 0 24px 20px;
+  margin: 0;
+  font: var(--mat-sys-body-medium);
+}
+.summary {
+  padding: 20px 24px;
+}
+.summary h3 {
+  margin: 0 0 8px;
+  font: var(--mat-sys-title-medium);
+}
+.summary p {
+  margin: 0;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 20px;
+}
+form {
+  display: grid;
+  gap: 20px;
+  max-width: 560px;
+}
+form button[type='submit'] {
+  justify-self: start;
+}
+mat-form-field {
+  min-width: 0;
+  max-width: 100%;
+}
+.full-width {
+  width: 100%;
+}
+.form-page {
+  max-width: 720px;
+  margin: 20px 0;
+}
+.form-page mat-card-header {
+  padding: 24px 24px 0;
+}
+.form-page mat-card-content {
+  padding: 24px;
+}
+.form-description {
+  color: var(--mat-sys-on-surface-variant);
+  margin-bottom: 24px;
+  font: var(--mat-sys-body-medium);
+}
+pre {
+  overflow: auto;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@media (max-width: 600px) {
+  header,
+  main,
+  footer {
+    width: calc(100% - 32px);
+  }
+  header {
+    padding-block: 24px;
+  }
+  h1 {
+    font: var(--mat-sys-headline-medium);
+  }
+  .demo-row {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+  }
+  .toolbar {
+    align-items: stretch;
+    gap: 16px;
+  }
+  .search-field,
+  .scenario-field {
+    flex-basis: 100%;
+  }
+  .toolbar app-stock-toggle {
+    padding-block: 4px;
+  }
+  .extra-content {
+    padding: 0 16px 16px;
+  }
+}

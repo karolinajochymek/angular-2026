@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wew-21-cz01-25": {
+    "angular-2026": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/wew-21-cz01-25",
+            "outputPath": "dist/angular-2026",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [],
@@ -68,10 +68,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "wew-21-cz01-25:build:production"
+              "buildTarget": "angular-2026:build:production"
             },
             "development": {
-              "buildTarget": "wew-21-cz01-25:build:development"
+              "buildTarget": "angular-2026:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,13 +79,10 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
+        "test": {
+          "builder": "@angular/build:unit-test",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "tsConfig": "tsconfig.spec.json"
           }
         }
       }

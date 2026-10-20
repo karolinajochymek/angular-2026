@@ -1,12 +1,25 @@
-<!-- @if zastępuje *ngIf; ng-container nie jest potrzebny — blok @if pełni tę samą rolę -->
-@if (item() && item().no) {
-  <!-- [class.clicked] zastępuje [ngClass]="{'clicked': item.isClicked}" -->
-  <div class="row" [class.clicked]="item().isClicked">
-    <div class="col">{{item().no}}</div>
-    <div class="col">{{item().name}}</div>
-    <!-- pipe currency działa identycznie jak w Angular 18 -->
-    <div class="col">{{item().price | currency:'USD':'symbol'}}</div>
-    <div class="col">{{item().quantity}}</div>
-    <button class="col blue" type="button" (click)="onClick()">Click here</button>
-  </div>
-}
+<!-- Cały wiersz należy do dziecka: prezentacja danych, formatowanie i akcja wyboru. -->
+<td>{{ item().name }}</td>
+<td>
+  @switch (item().category) {
+    @case ('biuro') {
+      Artykuły biurowe
+    }
+    @case ('elektronika') {
+      Elektronika
+    }
+  }
+</td>
+<td class="number-cell" [title]="item().quantity | stockLabel">{{ item().quantity }}</td>
+<td class="number-cell">{{ item().price | currency: 'PLN' : 'symbol' : '1.2-2' : 'pl' }}</td>
+<td>
+  <!-- Dziecko zgłasza intencję. To rodzic zapisuje wybór i przekazuje nowy selected. -->
+  <button
+    mat-button
+    type="button"
+    [attr.aria-pressed]="selected()"
+    (click)="picked.emit(item().id)"
+  >
+    {{ selected() ? 'Wybrano' : 'Wybierz' }}
+  </button>
+</td>

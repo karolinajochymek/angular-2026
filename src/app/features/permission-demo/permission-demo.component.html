@@ -1,0 +1,15 @@
+<mat-card appearance="outlined" class="demo-card">
+  <div class="demo-row">
+    <div>
+      <h2>Własna dyrektywa strukturalna</h2>
+      <p>Checkbox steruje utworzeniem dodatkowego fragmentu widoku.</p>
+    </div>
+    <mat-checkbox [checked]="canSeeExtra()" (change)="canSeeExtra.set($event.checked)"
+      >Pokaż fragment</mat-checkbox
+    >
+  </div>
+  <p class="extra-content" *appPermission="canSeeExtra()">
+    Ten fragment utworzyła dyrektywa appPermission. To sterowanie widokiem, nie zabezpieczenie
+    danych.
+  </p>
+</mat-card>
