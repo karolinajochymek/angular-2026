@@ -1,5 +1,7 @@
 <!-- Cały wiersz należy do dziecka: prezentacja danych, formatowanie i akcja wyboru. -->
-<td>{{ item().name }}</td>
+<td>
+  <a [routerLink]="['/items', item().id]">{{ item().name }}</a>
+</td>
 <td>
   @switch (item().category) {
     @case ('biuro') {

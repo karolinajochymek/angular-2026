@@ -1,0 +1,53 @@
+<div class="page-heading">
+  <h2>NgModule obok standalone</h2>
+  <p>Ten sam przepływ danych, dwa sposoby organizacji komponentów.</p>
+</div>
+<div class="demo-grid">
+  <mat-card appearance="outlined">
+    <mat-card-header
+      ><mat-card-title><h3>Komponent modułowy</h3></mat-card-title
+      ><mat-card-subtitle
+        >Wejście &#64;Input i zdarzenie &#64;Output</mat-card-subtitle
+      ></mat-card-header
+    >
+    <mat-card-content>
+      <div class="result">
+        <app-legacy-counter
+          [value]="count()"
+          (valueChange)="count.set($event)"
+        />
+      </div>
+      <p class="hint">
+        Kliknięcie emituje nową wartość do rodzica przez valueChange.
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card appearance="outlined">
+    <mat-card-header
+      ><mat-card-title><h3>Stan rodzica</h3></mat-card-title
+      ><mat-card-subtitle
+        >Komponent standalone z sygnałem</mat-card-subtitle
+      ></mat-card-header
+    >
+    <mat-card-content>
+      <div class="result" aria-live="polite">
+        <p class="metric">{{ count() }}</p>
+        <p class="metric-label">Aktualna wartość licznika</p>
+      </div>
+      <p class="hint">
+        Rodzic zapisuje zdarzenie w sygnale i przekazuje wartość z powrotem do
+        dziecka.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-card appearance="outlined" class="context"
+  ><mat-card-content
+    ><p><strong>Jak są połączone?</strong></p>
+    <p>
+      Komponent rodzica importuje NgModule, który deklaruje i eksportuje
+      komponent dziecka. Dekoratory &#64;Input i &#64;Output pozostają
+      wspierane.
+    </p></mat-card-content
+  ></mat-card
+>

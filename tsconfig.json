@@ -26,6 +26,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    "strictStandalone": true
+    // Część 2 celowo zawiera jeden komponent NgModule w demonstracji starszego kodu.
+    "strictStandalone": false
   }
 }

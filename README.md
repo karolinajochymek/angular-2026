@@ -1,32 +1,36 @@
-# Angular od podstaw — część 1
+# Angular od podstaw — część 2
 
-Kod demonstracji do szkolenia 2026. Angular 22.2.3, Angular Material 22.2.3, signals i komponenty standalone. Materiał dla osób znających podstawy HTML i JavaScript.
+Rozwinięcie listy produktów o DI, HTTP/RxJS, routing i Reactive Forms. Angular i Angular Material 22.2.3.
 
-Przed zajęciami wykonaj [instrukcję przygotowania środowiska](PRZYGOTOWANIE-SRODOWISKA.md). Obejmuje instalację narzędzi od zera i instrukcje dla agenta AI.
+Przygotowanie od zera: [instrukcja środowiska](PRZYGOTOWANIE-SRODOWISKA.md). Pomysły na dobrowolną pomoc AI: [Copilot](COPILOT-OPCJONALNIE.md).
 
 ```sh
 npm ci
-npm start
+npm start -- --port 4201
 ```
 
-Otwórz adres podany w terminalu. Na Windows PowerShell możesz używać `npm.cmd`. Do kontroli kodu: `npm run check` (ESLint, Vitest, build produkcyjny).
+`npm run check` uruchamia lint, testy Vitest i build. Na Windows PowerShell można używać `npm.cmd`.
 
 ## Mapa demonstracji
 
-| Temat | Kod | Co sprawdzić w aplikacji |
+| Temat | Kod / trasa | Co sprawdzić |
 |---|---|---|
-| Komponent i binding | `src/app/features/signal-counter/` | Kliknij licznik, zobacz widok i konsolę |
-| `signal`, `computed`, niemutowalność | `src/app/features/items/items-list/` | Wyszukaj produkt i zwiększ zapas dostawą |
-| `input`, `output` | `src/app/features/items/item/` | Wybierz produkt, obserwuj stan rodzica |
-| `model` | `src/app/shared/stock-toggle/` | Przełącz „Tylko dostępne” |
-| Control flow | Szablony listy i produktu | Wyszukaj nieistniejącą nazwę, porównaj kategorie |
-| Pipes | `src/app/shared/pipes/` | Opis dostępności i cena w PLN |
-| Dyrektywy | `src/app/shared/directives/` | Fokus na wierszu listy i checkbox dodatkowego fragmentu |
-| `@defer` | `src/app/features/items/inventory-summary/` | Kliknij przycisk podsumowania |
+| Serwis i DI | `src/app/core/services/catalog.service.ts` | Wspólne źródło danych listy i szczegółów |
+| HTTP, RxJS i `toSignal` | `/items` | Tryby normalny, pusty, błąd, ponownie normalny |
+| Routing i lazy loading | `src/app/app.routes.ts` | Lista, szczegóły, edycja, nieznany adres |
+| Reactive Forms | `/items/1/edit` | Pusta nazwa, ujemna cena, ułamkowa liczba sztuk |
+| Guards | `src/app/core/guards` | Niepoprawne id i opuszczenie zmienionego formularza |
+| Interceptor | `src/app/core/interceptors` | Nagłówek `X-Training-Demo` w Network |
+| Lifecycle | `/lifecycle` | Zmiana input, usunięcie i odtworzenie dziecka, konsola |
+| Bezpieczeństwo | `/security` | Interpolacja i sanityzowany HTML |
+| Starsze projekty | `/legacy` | NgModule, `@Input`, `@Output` i rodzic standalone |
+| Wydajność | Szczegóły i podsumowanie | `NgOptimizedImage`, `@defer`, OnPush |
 
-Gotowy motyw Material 3 Azure/Blue jest w `styles` w `angular.json`. Własny CSS określa rozmieszczenie elementów. Importy modułów Material w komponentach standalone to biblioteka UI, nie rezygnacja ze standalone.
+Pliki JSON w `src/assets` zastępują API na potrzeby nauki odczytu HTTP. Zapis formularza modyfikuje pamięć serwisu, nie plik ani serwer; odświeżenie przywraca dane początkowe. Nie przedstawiamy tego jako produkcyjnego backendu.
 
-Komentarze w kodzie wiążą przykłady z tematami prezentacji. [Opcjonalne prompty do Copilota](COPILOT-OPCJONALNIE.md) pomagają wyjaśniać kod i planować sprawdzenia. Copilot nie jest wymagany.
+Wygląd zapewnia gotowy motyw Material 3 Azure/Blue. Checkbox i slide toggle prezentują stan logiczny. Pola, wiersza listy i przyciski mają standardowy wygląd biblioteki.
+
+Zmiany pozostają niezacommitowane w osobnym katalogu roboczym brancha `part-2`. Commity i publikację wykonuje prowadząca.
 
 ## Podział komponentów
 
@@ -43,3 +47,11 @@ Zachowujemy natywny układ pięciu kolumn, kontrolki Material i tokeny gotowego 
 Selektor atrybutowy nie zmienia komponentu w dyrektywę.
 Dokumentacja: [selektory](https://angular.dev/guide/components/selectors),
 [control flow](https://angular.dev/guide/templates/control-flow).
+
+## Konwencje przykładów szkoleniowych
+
+- Widok każdego komponentu znajduje się w osobnym pliku `.html`, wskazanym przez `templateUrl`.
+- Powtarzalne opcje i elementy menu definiujemy jako typowane tablice danych i renderujemy przez `@for` ze stabilnym kluczem `track`.
+- Stałe listy opcji nie wymagają sygnałów; sygnał przechowuje zmieniający się wybór użytkownika.
+- Zależności i zachowanie komponentu pozostają w `.ts`, aby łatwo porównywać logikę z widokiem podczas szkolenia.
+- Komentarze wyjaśniają działanie elementu.Kontekst legacy opisuje składnię i organizację kodu; numer wersji podajemy tylko dla zweryfikowanej granicy dostępności lub zmiany zachowania API.

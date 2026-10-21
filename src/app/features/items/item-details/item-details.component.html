@@ -1,0 +1,17 @@
+<a mat-button routerLink="/items">Powrót do listy</a>
+@let current = state();
+@switch (current.status) {
+  @case ("loading") {
+    <p role="status">Ładowanie szczegółów…</p>
+  }
+  @case ("error") {
+    <p role="alert">Nie udało się pobrać szczegółów.</p>
+  }
+  @case ("missing") {
+    <h2>Produkt nie istnieje</h2>
+    <p>Identyfikator ma poprawny format, ale nie ma go w danych.</p>
+  }
+  @case ("ready") {
+    <app-product-card [item]="current.item" />
+  }
+}

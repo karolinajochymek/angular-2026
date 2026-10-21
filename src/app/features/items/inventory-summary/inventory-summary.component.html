@@ -1,0 +1,9 @@
+<mat-card appearance="outlined"
+  ><div class="summary">
+    <h3>Podsumowanie magazynu</h3>
+    <p>
+      Wartość zapasu:
+      {{ total() | currency: "PLN" : "symbol" : "1.2-2" : "pl" }}
+    </p>
+  </div></mat-card
+>

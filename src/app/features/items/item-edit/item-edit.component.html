@@ -1,0 +1,65 @@
+<a mat-button routerLink="/items">Powrót do listy</a>
+<mat-card appearance="outlined" class="form-page"
+  ><mat-card-header><mat-card-title>Edycja produktu</mat-card-title></mat-card-header
+  ><mat-card-content>
+    @switch (status()) {
+      @case ('loading') {
+        <p role="status">Ładowanie…</p>
+      }
+      @case ('missing') {
+        <p>Nie ma takiego produktu.</p>
+      }
+      @case ('error') {
+        <p role="alert">Nie udało się pobrać produktu.</p>
+      }
+      @case ('ready') {
+        <p class="form-description">
+          Zapis demonstracyjny: dane pozostają w pamięci do odświeżenia strony.
+        </p>
+        <form [formGroup]="form" (ngSubmit)="save()">
+          <mat-form-field appearance="outline">
+            <mat-label>Nazwa</mat-label
+            ><input matInput formControlName="name" aria-describedby="name-error" />
+            @if (form.controls.name.touched && form.controls.name.invalid) {
+              <mat-error id="name-error">Podaj nazwę: minimum 2 znaki, nie same spacje.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Cena (PLN)</mat-label
+            ><input
+              matInput
+              type="number"
+              min="0"
+              step="0.01"
+              formControlName="price"
+              aria-describedby="price-error"
+            />
+            @if (form.controls.price.touched && form.controls.price.invalid) {
+              <mat-error id="price-error">Podaj cenę nie mniejszą od zera.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Liczba sztuk</mat-label
+            ><input
+              matInput
+              type="number"
+              min="0"
+              step="1"
+              formControlName="quantity"
+              aria-describedby="quantity-error"
+            />
+            @if (form.controls.quantity.touched && form.controls.quantity.invalid) {
+              <mat-error id="quantity-error">Podaj nieujemną liczbę całkowitą.</mat-error>
+            }
+          </mat-form-field>
+          <button mat-flat-button type="submit" [disabled]="saving()">
+            {{ saving() ? 'Zapisywanie…' : 'Zapisz w pamięci' }}
+          </button>
+          @if (message()) {
+            <p role="alert">{{ message() }}</p>
+          }
+        </form>
+      }
+    }
+  </mat-card-content></mat-card
+>

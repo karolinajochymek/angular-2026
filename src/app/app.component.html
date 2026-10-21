@@ -1,1 +1,17 @@
-<app-main-page />
+<header>
+  <p class="eyebrow">ANGULAR OD PODSTAW / CZĘŚĆ 2</p>
+  <h1>Katalog produktów</h1>
+  <p class="intro">HTTP, routing i formularze · Karolina Jochymek · 2026</p>
+  <nav aria-label="Menu główne">
+    @for (link of navigationLinks; track link.path) {
+      <a mat-button [routerLink]="link.path" routerLinkActive="active">{{
+        link.label
+      }}</a>
+    }
+  </nav>
+</header>
+<main><router-outlet /></main>
+<footer>
+  Dane demonstracyjne. Zapis formularza działa w pamięci przeglądarki do
+  odświeżenia strony.
+</footer>

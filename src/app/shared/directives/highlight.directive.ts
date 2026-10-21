@@ -1,5 +1,5 @@
 import { Directive, input, signal } from '@angular/core';
-// Temat: dyrektywa atrybutowa. host dodaje zachowanie do istniejącej wiersza listy, bez własnego widoku.
+// host dodaje zachowanie do istniejącego wiersza listy, bez własnego widoku.
 // Powiązanie [style.outline] reaguje na signal; zdarzenia myszy i fokusu zmieniają jego stan.
 @Directive({
   selector: '[appHighlight]',

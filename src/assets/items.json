@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Notes",
+    "price": 18.9,
+    "quantity": 8,
+    "category": "biuro",
+    "createdAt": "2026-09-01",
+    "imageUrl": "/product.svg"
+  },
+  {
+    "id": 2,
+    "name": "Długopis",
+    "price": 5.5,
+    "quantity": 15,
+    "category": "biuro",
+    "createdAt": "2026-09-02",
+    "imageUrl": "/product.svg"
+  },
+  {
+    "id": 3,
+    "name": "Klawiatura",
+    "price": 199,
+    "quantity": 3,
+    "category": "elektronika",
+    "createdAt": "2026-09-03",
+    "imageUrl": "/product.svg"
+  },
+  {
+    "id": 4,
+    "name": "Mysz",
+    "price": 89,
+    "quantity": 0,
+    "category": "elektronika",
+    "createdAt": "2026-09-04",
+    "imageUrl": "/product.svg"
+  },
+  {
+    "id": 5,
+    "name": "Segregator",
+    "price": 12,
+    "quantity": 6,
+    "category": "biuro",
+    "createdAt": "2026-09-05",
+    "imageUrl": "/product.svg"
+  },
+  {
+    "id": 6,
+    "name": "Monitor",
+    "price": 899,
+    "quantity": 2,
+    "category": "elektronika",
+    "createdAt": "2026-09-06",
+    "imageUrl": "/product.svg"
+  }
+]

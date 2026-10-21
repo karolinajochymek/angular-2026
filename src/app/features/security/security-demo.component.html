@@ -1,0 +1,74 @@
+<div class="page-heading">
+  <h2>Bezpieczne wyświetlanie treści</h2>
+  <p>
+    Porównaj ten sam tekst pokazany przez interpolację oraz binding innerHTML.
+  </p>
+</div>
+<mat-card appearance="outlined" class="source-card">
+  <mat-card-header
+    ><mat-card-title><h3>Treść wejściowa</h3></mat-card-title
+    ><mat-card-subtitle
+      >Zmień HTML i porównaj oba wyniki poniżej</mat-card-subtitle
+    ></mat-card-header
+  >
+  <mat-card-content
+    ><mat-form-field appearance="outline" subscriptSizing="dynamic"
+      ><mat-label>Przykładowa treść HTML</mat-label
+      ><textarea
+        matInput
+        rows="3"
+        [ngModel]="content()"
+        (ngModelChange)="content.set($event)"
+      ></textarea></mat-form-field
+  ></mat-card-content>
+</mat-card>
+<div class="demo-grid">
+  <mat-card appearance="outlined">
+    <mat-card-header
+      ><mat-card-title><h3>Interpolacja</h3></mat-card-title
+      ><mat-card-subtitle
+        >Znaczniki są zwykłym tekstem</mat-card-subtitle
+      ></mat-card-header
+    >
+    <mat-card-content
+      ><div class="result">
+        <p class="literal" data-testid="literal-content">{{ content() }}</p>
+      </div>
+      <p class="hint">
+        Przeglądarka wyświetla treść bez interpretowania jej jako HTML.
+      </p></mat-card-content
+    >
+  </mat-card>
+  <mat-card appearance="outlined">
+    <mat-card-header
+      ><mat-card-title><h3>Binding innerHTML</h3></mat-card-title
+      ><mat-card-subtitle
+        >HTML po sanityzacji Angulara</mat-card-subtitle
+      ></mat-card-header
+    >
+    <mat-card-content
+      ><div
+        class="result"
+        data-testid="sanitized-content"
+        [innerHTML]="content()"
+      ></div>
+      <p class="hint">
+        Angular sanityzuje HTML. Nie używamy bypassSecurityTrustHtml do
+        nieznanych danych.
+      </p></mat-card-content
+    >
+  </mat-card>
+</div>
+<mat-card appearance="outlined" class="context"
+  ><mat-card-content
+    ><p><strong>Granica odpowiedzialności</strong></p>
+    <p>
+      Guard i ukryty przycisk poprawiają interfejs. Serwer musi sam sprawdzać
+      tożsamość i uprawnienia do danych.
+    </p>
+    <p>
+      XSRF wymaga współpracy serwera i klienta. CSP jest polityką wdrożenia. Ten
+      przykład dotyczy wyświetlania treści, nie implementuje logowania.
+    </p></mat-card-content
+  ></mat-card
+>

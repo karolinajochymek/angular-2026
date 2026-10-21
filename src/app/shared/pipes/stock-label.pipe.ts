@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-// Temat: pipes. stockLabel przekształca liczbę na opis w {{ quantity | stockLabel }}.
+// stockLabel przekształca liczbę na opis w {{ quantity | stockLabel }}.
 // Pure pipe (domyślny) przelicza wynik przy zmianie argumentu, a nie do obsługi zdarzeń.
 @Pipe({ name: 'stockLabel' })
 export class StockLabelPipe implements PipeTransform {

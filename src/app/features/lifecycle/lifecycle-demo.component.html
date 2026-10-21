@@ -1,0 +1,69 @@
+<div class="page-heading">
+  <h2>Cykl życia komponentu</h2>
+  <p>
+    Zmień dane wejściowe i sprawdź, co dzieje się podczas tworzenia oraz
+    usuwania komponentu.
+  </p>
+</div>
+<div class="demo-grid">
+  <mat-card appearance="outlined">
+    <mat-card-header
+      ><mat-card-title><h3>Sterowanie przykładem</h3></mat-card-title
+      ><mat-card-subtitle
+        >Stan komponentu rodzica</mat-card-subtitle
+      ></mat-card-header
+    >
+    <mat-card-content>
+      <div class="controls">
+        <mat-form-field appearance="outline"
+          ><mat-label>Tekst przekazywany do dziecka</mat-label
+          ><input
+            matInput
+            [ngModel]="word()"
+            (ngModelChange)="word.set($event)"
+        /></mat-form-field>
+        <mat-checkbox
+          [checked]="visible()"
+          (change)="visible.set($event.checked)"
+          >Pokaż komponent dziecka</mat-checkbox
+        >
+      </div>
+      <p class="hint">
+        Otwórz konsolę przeglądarki, aby obserwować wywołania hooków i efektu.
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card appearance="outlined">
+    <mat-card-header
+      ><mat-card-title><h3>Widok dziecka</h3></mat-card-title
+      ><mat-card-subtitle
+        >Wynik przekazania input</mat-card-subtitle
+      ></mat-card-header
+    >
+    <mat-card-content>
+      <div class="result" aria-live="polite">
+        @if (visible()) {
+          <app-lifecycle-child [word]="word()" />
+        } @else {
+          <p>
+            Komponent został usunięty. Włącz przełącznik, aby utworzyć nową
+            instancję.
+          </p>
+        }
+      </div>
+      <p class="hint">
+        Zmiana tekstu aktualizuje input. Wyłączenie widoczności niszczy
+        instancję dziecka.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-card appearance="outlined" class="context"
+  ><mat-card-content
+    ><p><strong>Signals a cykl życia</strong></p>
+    <p>
+      ngOnChanges reaguje także na input(). effect śledzi zależności sygnałowe,
+      ale nie zastępuje całego cyklu życia komponentu.
+    </p></mat-card-content
+  ></mat-card
+>
