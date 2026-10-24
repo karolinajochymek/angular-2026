@@ -12,7 +12,8 @@
     }
   }
 </td>
-<td class="number-cell" [title]="item().quantity | stockLabel">{{ item().quantity }}</td>
+<!-- Binding stylu nie zmienia danych, a pipe przygotowuje opis dostępności. -->
+<td class="number-cell" [style.font-weight]="item().quantity === 0 ? 600 : 400" [title]="item().quantity | stockLabel">{{ item().quantity }}</td>
 <td class="number-cell">{{ item().price | currency: 'PLN' : 'symbol' : '1.2-2' : 'pl' }}</td>
 <td>
   <!-- Dziecko zgłasza intencję. To rodzic zapisuje wybór i przekazuje nowy selected. -->
@@ -20,6 +21,7 @@
     mat-button
     type="button"
     [attr.aria-pressed]="selected()"
+    [attr.aria-label]="'Wybierz produkt: ' + item().name"
     (click)="picked.emit(item().id)"
   >
     {{ selected() ? 'Wybrano' : 'Wybierz' }}

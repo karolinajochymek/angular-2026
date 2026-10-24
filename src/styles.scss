@@ -249,3 +249,7 @@ pre {
     padding: 0 16px 16px;
   }
 }
+
+// Klasy ustawiane przez @for: pozycja na liście nie zastępuje track item.id.
+.products-table .alternate-row { background: var(--mat-sys-surface-container-low); }
+.products-table .first-row td { border-top: 2px solid var(--mat-sys-outline-variant); }

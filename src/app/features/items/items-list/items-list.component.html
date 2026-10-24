@@ -48,11 +48,14 @@
             </tr>
           </thead>
           <tbody>
-            @for (item of filteredItems(); track item.id) {
-              <!-- app-item uruchamia komponent na tr; jego szablon zawiera pięć komórek td. -->
+            @for (item of filteredItems(); track item.id; let odd = $odd; let first = $first) {
+              <!-- $odd i $first opisują pozycję po filtrowaniu; track id opisuje tożsamość produktu. -->
+          <!-- app-item uruchamia komponent na tr; jego szablon zawiera pięć komórek td. -->
               <tr
                 app-item
                 [item]="item"
+            [class.alternate-row]="odd"
+            [class.first-row]="first"
                 [selected]="selectedId() === item.id"
                 (picked)="selectedId.set($event)"
                 [appHighlight]="'var(--mat-sys-primary)'"
