@@ -13,6 +13,8 @@ import { Item } from '../models/item';
 import { ItemComponent } from '../item/item.component';
 import { StockToggleComponent } from '../../../shared/stock-toggle/stock-toggle.component';
 import { InventorySummaryComponent } from '../inventory-summary/inventory-summary.component';
+// Unia rozróżniana przez status: data istnieje tylko dla success, message tylko dla error.
+// @switch w HTML zawęża typ do odpowiedniego wariantu.
 type ListState =
   | { status: 'loading' }
   | { status: 'success'; data: readonly Item[] }
@@ -32,6 +34,8 @@ type ListState =
     InventorySummaryComponent,
   ],
   templateUrl: './items-list.component.html',
+  // Angular 22 domyślnie używa OnPush. Tu zapis jest jawny, aby rozpoznać go także w starszym kodzie.
+  // W pozostałych komponentach korzystamy z wartości domyślnej.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemsListComponent {
@@ -56,6 +60,8 @@ export class ItemsListComponent {
   // catchError wewnątrz switchMap obsługuje błąd pojedynczego HTTP, zachowując kolejne zmiany trybu.
   // startWith zapewnia loading dla każdego żądania. toSignal udostępnia stan synchronicznie w HTML
   // i automatycznie sprząta subskrypcję wraz ze zniszczeniem komponentu.
+  // map opakowuje dane w success; of emituje zastępczy stan error i kończy ten strumień.
+  // Nie tworzymy toSignal ani nowych żądań przy każdym odczycie szablonu.
   readonly state = toSignal(
     toObservable(this.mode).pipe(
       switchMap((mode) =>

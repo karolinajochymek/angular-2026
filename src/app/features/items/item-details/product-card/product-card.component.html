@@ -1,5 +1,7 @@
 <mat-card appearance="outlined" class="product-card">
   <div class="product-image">
+    <!-- NgOptimizedImage obsługuje ngSrc. Wymiary określają proporcje, CSS układ obrazu. -->
+    <!-- priority przyspiesza pobranie głównej ilustracji widocznej od razu na stronie. -->
     <img
       [ngSrc]="item().imageUrl"
       width="480"

@@ -1,5 +1,5 @@
 import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
@@ -19,7 +19,6 @@ import { StockLabelPipe } from '../../../../shared/pipes/stock-label.pipe';
   ],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCardComponent {
   readonly item = input.required<Item>();

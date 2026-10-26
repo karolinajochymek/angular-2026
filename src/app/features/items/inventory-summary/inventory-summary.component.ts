@@ -1,6 +1,5 @@
 import { MatCardModule } from '@angular/material/card';
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   input,
@@ -11,7 +10,6 @@ import { Item } from '../models/item';
   selector: 'app-inventory-summary',
   imports: [MatCardModule, CurrencyPipe],
   templateUrl: './inventory-summary.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventorySummaryComponent {
   readonly items = input.required<readonly Item[]>();

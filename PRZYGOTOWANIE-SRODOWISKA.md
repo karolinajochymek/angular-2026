@@ -6,6 +6,10 @@ Instrukcja dotyczy Angulara **22.2.3** i Angular Material **22.2.3**. Repozytori
 
 ## 1. Co będzie potrzebne
 
+Jeśli masz już Node, zacznij od `node --version` i porównaj wynik z wymaganiami powyżej.
+Node 20 jest za stary; w linii 22 wymagane jest co najmniej 22.22.3.
+Wykonaj tę kontrolę przed spotkaniem
+
 | Narzędzie | Do czego służy | Skąd je pobrać |
 |---|---|---|
 | Aktualna przeglądarka Edge, Chrome lub Firefox | Otwieranie aplikacji i narzędzi deweloperskich | Na Windows Edge zwykle jest już zainstalowany |
@@ -25,20 +29,27 @@ git --version
 code --version
 ```
 
+Na macOS/Linux użyj `npm --version` zamiast `npm.cmd --version`.
+
 Oczekiwane: Node `v24.19.0` albo zgodna aktualizacja linii 24 LTS, numery wersji npm i Git, numer wersji VS Code. Gdy `code` nie jest rozpoznawane, możesz otworzyć folder z menu VS Code; nie blokuje to szkolenia. Gdy nie ma `node`, `npm` lub `git`, zakończ ten etap naprawą instalacji lub PATH.
 
 Nie ustawiaj globalnie innej wersji Node, jeśli utrzymujesz inne projekty. Użyj istniejącego menedżera wersji; plik `.nvmrc` wskazuje wersję tego szkolenia. Na komputerze bez wcześniejszych projektów wystarczy instalator.
 
 ## 3. Pobranie materiałów
 
-**Uwaga organizacyjna:** zaktualizowany kod jest obecnie przygotowywany lokalnie przez prowadzącą i nie został jeszcze opublikowany. Poniższe klonowanie branchy zadziała po ich publikacji. Do tego czasu skorzystaj z otrzymanej od prowadzącej paczki właściwej części i rozpakuj ją do nowego folderu. Nie zmieniaj branchy w katalogu prowadzącej z niezapisanymi zmianami.
+Korzystaj z branchy wskazanych przez prowadzącą. Jeżeli otrzymasz paczkę zamiast repozytorium,
+rozpakuj ją do nowego folderu i pomiń polecenia Git. Brak dostępu do brancha zgłoś prowadzącej;
+nie twórz zastępczego pustego brancha.
 
 Windows, PowerShell:
 
 ```powershell
-git clone  https://github.com/karolinajochymek/angular-2026.git 
+git clone --branch part-1 https://github.com/karolinajochymek/angular-2026.git
+cd angular-2026
+git branch --show-current
 ```
-Branch part-1 zawiera repozytorium ktore bedzie uzywane na cz1 szkolenia, part-2 na cz2.
+Te same polecenia Git i `cd` działają na macOS/Linux. Oczekiwany branch: `part-1`.
+Jedno repozytorium zawiera dwie części: `part-1` i `part-2`.
 
 ## 4. Instalacja bibliotek i uruchomienie
 
@@ -59,7 +70,26 @@ npm.cmd run check
 
 Polecenie uruchamia lint, testy i build. Sukces oznacza kod zakończenia `0`. Ten projekt korzysta z lokalnego Angular CLI, więc nie trzeba instalować `ng` globalnie.
 
-Część 2 uruchom analogicznie z jej folderu po `npm ci`. Gdy część 1 nadal działa, wybierz inny port:
+Na macOS/Linux we wszystkich powyższych poleceniach użyj `npm` zamiast `npm.cmd`.
+
+Przed częścią 2 zatrzymaj serwer przez Ctrl+C i sprawdź stan repozytorium:
+
+```sh
+git status --short
+```
+
+Jeśli są własne zmiany, najpierw je zabezpiecz. Nie używaj reset --hard ani wymuszonego
+przełączenia. Przy czystym katalogu roboczym:
+
+```powershell
+git switch part-2
+npm.cmd ci
+npm.cmd start
+```
+
+Po zmianie brancha ponownie instalujemy zależności z jego lockfile. W paczkach bez Git
+otwórz osobny folder części 2 otrzymany od prowadzącej i wykonaj `npm ci` oraz `npm start`.
+Jeżeli świadomie uruchamiasz drugą kopię projektu równolegle, wybierz inny port:
 
 ```powershell
 npm.cmd start -- --port 4201
@@ -75,6 +105,16 @@ Set-Location moj-angular
 npx.cmd ng add @angular/material@22.2.3
 ```
 
+macOS/Linux:
+
+```sh
+npx @angular/cli@22.2.3 new moj-angular --routing --style=scss --standalone --ssr=false --skip-git --defaults
+cd moj-angular
+npx ng add @angular/material@22.2.3
+```
+
+`--standalone` jest jawne dla czytelności; w tej wersji CLI to już zachowanie domyślne.
+
 Zaakceptuj instalację Material. W konfiguracji wybierz gotowy motyw Azure/Blue, jeżeli CLI wyświetli wybór motywu. Jeżeli generator zaproponuje własny motyw, do odwzorowania szkolenia użyj `@angular/material/prebuilt-themes/azure-blue.css` w tablicy `styles` w `angular.json`; unikaj równoczesnego ładowania dwóch motywów. Aktualne opcje schematu można sprawdzić poleceniem `npx.cmd ng add @angular/material@22.2.3 --help`.
 
 ```powershell
@@ -89,7 +129,7 @@ Własny projekt ma początkowy ekran Angulara, a nie gotową listę produktów z
 |---|---|
 | `node` / `npm` nierozpoznane | Nowy terminal po instalacji; na Windows `where.exe node`, `where.exe npm` |
 | `npm.ps1 cannot be loaded` | Użyj `npm.cmd`, bez zmiany ExecutionPolicy |
-| Node zbyt stary / `EBADENGINE` | `node --version`, `.nvmrc`, zgodność z Angular 22 |
+| Node zbyt stary / `EBADENGINE` | Porównaj `node --version`, `.nvmrc` i engines w package.json. npm może tylko ostrzec albo przerwać instalację zależnie od engine-strict; ostrzeżenie nie potwierdza zgodności |
 | `ENOENT ... package.json` | Aktualny folder: `Get-Location` i `Get-ChildItem` (macOS/Linux: `pwd`, `ls`) |
 | Port 4200 zajęty | Zatrzymaj własny poprzedni serwer lub użyj `--port 4201`; nie zabijaj nieznanego procesu |
 | Problemy sieciowe / certyfikat / proxy | Sprawdź VPN i internet, przekaż IT komunikat. Nie ustawiaj `strict-ssl=false` |

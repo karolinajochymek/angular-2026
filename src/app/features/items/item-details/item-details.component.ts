@@ -1,5 +1,5 @@
 import { MatButtonModule } from '@angular/material/button';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -14,7 +14,6 @@ type DetailState =
 @Component({
   selector: 'app-item-details',
   imports: [MatButtonModule, ProductCardComponent, RouterLink],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './item-details.component.html',
 })
 export class ItemDetailsComponent {

@@ -6,6 +6,11 @@ import { unsavedChangesGuard } from './core/guards/unsaved-changes.guard';
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'items' },
   {
+    path: 'basics',
+    loadComponent: () =>
+      import('./features/main-page/main-page.component').then((m) => m.MainPageComponent),
+  },
+  {
     path: 'items',
     loadComponent: () =>
       import('./features/items/items-list/items-list.component').then((m) => m.ItemsListComponent),

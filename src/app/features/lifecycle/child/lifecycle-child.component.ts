@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnChanges,
   OnDestroy,
@@ -12,7 +11,6 @@ import {
 @Component({
   selector: 'app-lifecycle-child',
   templateUrl: './lifecycle-child.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LifecycleChildComponent implements OnChanges, OnInit, OnDestroy {
   // Zmiana input z rodzica uruchomi zarówno odpowiedni hook, jak i zależny effect.

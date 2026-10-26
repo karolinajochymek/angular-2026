@@ -7,6 +7,9 @@ describe('StockLabelPipe', () => {
   it('opisuje brak zapasu', () => {
     expect(pipe.transform(0)).toBe('Brak w magazynie');
   });
+  it('traktuje ujemną ilość jako brak zapasu', () => {
+    expect(pipe.transform(-1)).toBe('Brak w magazynie');
+  });
   // Sprawdzamy obie strony progu; samo sprawdzenie jednej dodatniej wartości nie wystarczy.
   it('rozróżnia próg i wartość powyżej niego', () => {
     expect(pipe.transform(3)).toBe('Ostatnie sztuki: 3');

@@ -1,4 +1,5 @@
 <a mat-button routerLink="/items">Powrót do listy</a>
+<!-- @let nadaje lokalną nazwę wynikowi odczytu, nie tworzy nowego signal ani subskrypcji. -->
 @let current = state();
 @switch (current.status) {
   @case ("loading") {

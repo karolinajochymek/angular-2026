@@ -2,7 +2,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -22,7 +22,6 @@ type EditState = { status: 'loading' | 'missing' | 'error' } | { status: 'ready'
     RouterLink,
   ],
   templateUrl: './item-edit.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemEditComponent implements HasUnsavedChanges {
   private readonly catalog = inject(CatalogService);
@@ -38,6 +37,7 @@ export class ItemEditComponent implements HasUnsavedChanges {
   // nonNullable utrzymuje typ string/number po reset(). Validators sprawdzają dane wejściowe.
   // Opcjonalnie Copilot: zaproponuj tabelę danych poprawnych i błędnych dla tych walidatorów.
   // Nie zmieniaj walidacji tylko po to, żeby wygenerowany test przeszedł.
+  // FormGroup może być typowany; UntypedFormGroup zachowuje nietypowane API starszych projektów.
   readonly form = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(2), Validators.pattern(/\S/)]],
     price: [0, [Validators.required, Validators.min(0)]],
@@ -46,6 +46,8 @@ export class ItemEditComponent implements HasUnsavedChanges {
   constructor() {
     // Parametr id może zmienić się bez odtworzenia komponentu. switchMap pobiera aktualny produkt.
     // takeUntilDestroyed kończy subskrypcję przy opuszczaniu widoku.
+    // Starszy zapis: unsubscribe() w ngOnDestroy albo Subject + takeUntil(destroy$).
+    // HTTP zwykle kończy strumień po odpowiedzi, ale paramMap obserwuje kolejne nawigacje.
     this.route.paramMap
       .pipe(
         switchMap((params) =>

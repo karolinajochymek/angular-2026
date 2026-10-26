@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -12,7 +11,6 @@ import {
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
   templateUrl: './legacy-counter.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LegacyCounterComponent {
   @Input() value = 0;
