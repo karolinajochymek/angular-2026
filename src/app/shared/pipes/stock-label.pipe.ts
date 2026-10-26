@@ -5,7 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class StockLabelPipe implements PipeTransform {
   // Drugi parametr ma domyślny próg; w HTML zmienisz go przez quantity | stockLabel:5.
   transform(quantity: number, lowStock = 3): string {
-    if (quantity === 0) return 'Brak w magazynie';
+    // Wartość niedodatnia oznacza brak zapasu, także gdy dane wejściowe zawierają liczbę ujemną.
+    if (quantity <= 0) return 'Brak w magazynie';
     return quantity <= lowStock ? `Ostatnie sztuki: ${quantity}` : `Dostępne: ${quantity}`;
   }
 }

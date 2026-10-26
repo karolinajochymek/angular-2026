@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal, effect } from '@angular/core';
+import { Component, signal, effect } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-signal-counter',
   imports: [MatCardModule, MatButtonModule],
   templateUrl: './signal-counter.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalCounterComponent {
   // Każda instancja ma własny stan; effect służy tu wyłącznie do logowania.

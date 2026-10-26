@@ -21,6 +21,8 @@ import { InventorySummaryComponent } from '../inventory-summary/inventory-summar
     InventorySummaryComponent,
   ],
   templateUrl: './items-list.component.html',
+  // Angular 22 domyślnie używa OnPush. Tu zapis jest jawny, aby rozpoznać go także w starszym kodzie.
+  // W pozostałych komponentach korzystamy z wartości domyślnej.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemsListComponent {
@@ -47,7 +49,9 @@ export class ItemsListComponent {
     this.items().find((item) => item.id === this.selectedId()),
   );
   // update korzysta z poprzedniego stanu; map i spread tworzą nową tablicę oraz obiekty.
-  // Dzięki temu zachowujemy niemutowalność: nie wykonujemy items()[0].quantity++.
+  // Item.quantity jest readonly: items()[0].quantity++ zatrzyma już TypeScript.
+  // Bez readonly mutacja obiektu nadal nie powiadamiałaby signal o zmianie referencji.
+  // readonly chroni na etapie kompilacji, nie zamraża obiektu podczas działania aplikacji.
   restock(): void {
     this.items.update((items) => items.map((item) => ({ ...item, quantity: item.quantity + 1 })));
   }

@@ -33,7 +33,7 @@ Komentarze w kodzie wiążą przykłady z tematami prezentacji. [Opcjonalne prom
 - `ItemsListComponent`: kolekcja, filtrowanie, wybór oraz nagłówki tabeli.
 - `ItemComponent`: cały wiersz produktu, pipe ceny i dostępności, kategoria i akcja wyboru.
   Dane płyną przez `input()`, zdarzenie wraca przez `output()` — odpowiedniki kontraktu
-  `@Input()` / `@Output()` z wersji 2025.
+  `@Input()` / `@Output()` spotykane także w utrzymywanych projektach.
 - `MainPageComponent`: kompozycja; licznik i demonstracja dyrektywy mają własne komponenty.
 - `StockToggleComponent` i `InventorySummaryComponent`: samodzielne, małe elementy widoku.
 
@@ -43,3 +43,33 @@ Zachowujemy natywny układ pięciu kolumn, kontrolki Material i tokeny gotowego 
 Selektor atrybutowy nie zmienia komponentu w dyrektywę.
 Dokumentacja: [selektory](https://angular.dev/guide/components/selectors),
 [control flow](https://angular.dev/guide/templates/control-flow).
+
+## Jak czytać konfigurację Angulara 22
+
+Wszystkie komponenty aplikacji mają osobne pliki HTML. Niewielkie komponenty pomocnicze
+w testach mogą używać inline template, aby scenariusz testu był widoczny w jednym miejscu.
+Komponenty są domyślnie standalone od Angulara 19; `standalone: false` wskazuje komponent
+deklarowany w NgModule. Jawne `standalone: true` nadal jest poprawne.
+
+OnPush jest domyślną strategią Angulara 22. W `ItemsListComponent` pozostaje jawna
+deklaracja jako przykład składni spotykanej również w starszym kodzie. Pozostałe
+komponenty korzystają z wartości domyślnej. Dawna strategia `Default` ma teraz nazwę
+`Eager`; `Default` jest przestarzałym aliasem. [Strategie sprawdzania widoku](https://angular.dev/api/core/ChangeDetectionStrategy).
+
+Zoneless jest domyślne od Angulara 21. Angular otrzymuje powiadomienia m.in. przez
+zmiany sygnałów odczytanych w szablonie i obsługę zdarzeń. W projektach z Zone.js
+spotkasz `provideZoneChangeDetection` oraz `NgZone`; Zone.js śledzi zdarzenia i zadania
+asynchroniczne jako sygnały do synchronizacji aplikacji. OnPush i zoneless dotyczą
+różnych aspektów aktualizacji widoku. `ChangeDetectorRef.markForCheck()` może być
+przydatne również w zoneless; `detectChanges()` uruchamia sprawdzenie widoku.
+Nie trzeba dodawać tych wywołań po każdym `signal.set()`. [Zoneless](https://angular.dev/guide/zoneless).
+
+Wersję projektu sprawdzaj w `package.json` i lockfile. Sama obecność NgModule,
+dekoratorów Input/Output czy jawnego standalone nie pozwala określić wieku aplikacji.
+
+Zasoby statyczne umieszczamy w `public/`; `angular.json` kopiuje je do wyniku builda.
+Część 1 czyta produkty z `src/app/features/items/data/items.ts`, bez HTTP.
+Nie potrzebuje plików environments ani drugiego katalogu zasobów. W starszych
+konfiguracjach możesz spotkać `src/assets` i builder `@angular-devkit/build-angular:browser`;
+tutaj używamy `@angular/build:application`. Katalog assets jest konfigurowalny,
+więc jego nazwa sama nie identyfikuje buildera ani wersji Angulara.

@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { StockLabelPipe } from '../../../shared/pipes/stock-label.pipe';
 import { MatButtonModule } from '@angular/material/button';
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Item } from '../models/item';
 // dziecko wyświetla cały produkt, rodzic zarządza kolekcją.
 // Komponent działa na natywnym tr, aby komórki td pozostały bezpośrednimi dziećmi wiersza.
@@ -12,7 +12,6 @@ import { Item } from '../models/item';
   selector: 'tr[app-item]',
   imports: [MatButtonModule, CurrencyPipe, StockLabelPipe],
   templateUrl: './item.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
   // input.required oznacza obowiązkowe dane od rodzica: <tr app-item [item]="produkt"></tr>.

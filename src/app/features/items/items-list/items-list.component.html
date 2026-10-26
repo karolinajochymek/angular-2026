@@ -9,6 +9,7 @@
   <div class="toolbar">
     <mat-form-field class="search-field" appearance="outline" subscriptSizing="dynamic">
       <mat-label>Szukaj produktu</mat-label>
+      <!-- Rozdzielamy odczyt i zapis, aby pokazać kierunek danych. Skrót dla WritableSignal: [(ngModel)]="filter". -->
       <input matInput type="search" [ngModel]="filter()" (ngModelChange)="filter.set($event)" />
     </mat-form-field>
     <app-stock-toggle [(checked)]="onlyAvailable" />
