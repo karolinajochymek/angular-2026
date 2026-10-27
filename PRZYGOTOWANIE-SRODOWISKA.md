@@ -2,18 +2,30 @@
 
 Wykonaj tę instrukcję **przed szkoleniem**. Pierwsza instalacja może zająć 30–60 minut, dłużej, jeśli potrzebna jest pomoc firmowego IT. Na zajęciach otworzymy gotową aplikację i omówimy strukturę projektu. Nie będziemy instalować narzędzi krok po kroku.
 
-Instrukcja dotyczy Angulara **22.2.3** i Angular Material **22.2.3**. Repozytorium zawiera dokładne wersje w `package-lock.json`. Zalecany Node.js: **24.19.0** (linia 24 LTS). Nie instaluj po prostu najnowszego Node bez sprawdzenia zgodności. Wymagania Angulara 22: Node `^22.22.3 || ^24.15.0 || >=26.0.0`, TypeScript `>=6.0 <6.1`.
+Instrukcja dotyczy Angulara **22.2.3** i Angular Material **22.2.3**. Repozytorium zawiera dokładne wersje w `package-lock.json`.
+
+W szkoleniu używamy **Node.js 22.23.4**; tę wersję wskazuje `.nvmrc`. Ze względu na poprawki bezpieczeństwa minimalne dopuszczone wersje w poszczególnych liniach są następujące:
+
+| Zainstalowana wersja | Wymagana aktualizacja |
+|---|---|
+| 22.x starsza niż 22.23.4 | **22.23.4** lub nowsza poprawka linii 22 |
+| 24.x starsza niż 24.22.1 | **24.22.1** lub nowsza poprawka linii 24 |
+| 26.x starsza niż 26.12.1 | **26.12.1** lub nowsza poprawka linii 26 |
+
+Źródła: oficjalne wydania bezpieczeństwa [Node.js 22.23.4](https://nodejs.org/en/blog/release/v22.23.4), [24.22.1](https://nodejs.org/en/blog/release/v24.22.1), [26.12.1](https://nodejs.org/en/blog/release/v26.12.1).
+
+To progi bezpieczeństwa przyjęte dla materiałów, a nie pierwotne minima zgodności Angulara. `engines.node` w projekcie: `^22.23.4 || ^24.22.1 || ^26.12.1`. Nie instaluj automatycznie kolejnej głównej wersji Node bez sprawdzenia zgodności. TypeScript dla Angulara 22: `>=6.0 <6.1`.
 
 ## 1. Co będzie potrzebne
 
 Jeśli masz już Node, zacznij od `node --version` i porównaj wynik z wymaganiami powyżej.
-Node 20 jest za stary; w linii 22 wymagane jest co najmniej 22.22.3.
+Node 20 nie jest obsługiwany. W linii 22 wymagamy co najmniej 22.23.4; pozostałe progi znajdziesz w tabeli powyżej.
 Wykonaj tę kontrolę przed spotkaniem
 
 | Narzędzie | Do czego służy | Skąd je pobrać |
 |---|---|---|
 | Aktualna przeglądarka Edge, Chrome lub Firefox | Otwieranie aplikacji i narzędzi deweloperskich | Na Windows Edge zwykle jest już zainstalowany |
-| Node.js 24 LTS z npm | Uruchamianie narzędzi projektu i pobieranie bibliotek | [Oficjalne instalatory Node.js](https://nodejs.org/en/download) |
+| Node.js 22.23.4 LTS z npm | Uruchamianie narzędzi projektu i pobieranie bibliotek | [Oficjalne instalatory Node.js](https://nodejs.org/en/download) |
 | Git | Pobranie repozytorium i wybór części szkolenia | [Git](https://git-scm.com/downloads) |
 | Visual Studio Code | Edycja kodu i terminal | [Visual Studio Code](https://code.visualstudio.com/download) |
 | Angular Language Service | Podpowiedzi i błędy w szablonach HTML | Rozszerzenia VS Code, wydawca Angular, identyfikator `Angular.ng-template` |
@@ -31,7 +43,7 @@ code --version
 
 Na macOS/Linux użyj `npm --version` zamiast `npm.cmd --version`.
 
-Oczekiwane: Node `v24.19.0` albo zgodna aktualizacja linii 24 LTS, numery wersji npm i Git, numer wersji VS Code. Gdy `code` nie jest rozpoznawane, możesz otworzyć folder z menu VS Code; nie blokuje to szkolenia. Gdy nie ma `node`, `npm` lub `git`, zakończ ten etap naprawą instalacji lub PATH.
+Oczekiwane: Node `v22.23.4` (wersja szkoleniowa) albo nowsza poprawka jednej z linii spełniających progi z tabeli, numery wersji npm i Git, numer wersji VS Code. Gdy `code` nie jest rozpoznawane, możesz otworzyć folder z menu VS Code; nie blokuje to szkolenia. Gdy nie ma `node`, `npm` lub `git`, zakończ ten etap naprawą instalacji lub PATH.
 
 Nie ustawiaj globalnie innej wersji Node, jeśli utrzymujesz inne projekty. Użyj istniejącego menedżera wersji; plik `.nvmrc` wskazuje wersję tego szkolenia. Na komputerze bez wcześniejszych projektów wystarczy instalator.
 
